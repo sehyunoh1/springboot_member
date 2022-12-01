@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>수정</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<form action="/member/update" method="post" name="updateform">
+        <input type="text" name="Id" th:value="${member.Id}" class="form-control" readonly>
+        <input type="text" name="memberName" th:value="${member.memberName}" class="form-control" >
+        <input type="text" name="memberEmail" th:value="${member.memberEmail}" class="form-control"readonly>
+        <input type="text" name="memberPassword" id="memberPassword" placeholder="비밀번호"  class="form-control">
+        <input type="text" name="memberAge" th:value="${member.memberAge}" class="form-control" >
+        <input type="text" name="memberPhone" th:value="${member.memberPhone}" class="form-control">
+        <input type="button" class="btn btn-primary" value="회원정보 수정" onclick="update()">
+    </form>
+</form>
+</body>
+<script th::inline="javascript"> // 스프링 부트에서는 꼭 입력해줘야함.
+    const update = () => {
+     const passwordDB = [[${member.memberPassword}]];
+     const passwordInput = document.getElementById("memberPassword").value;
+     console.log(passwordDB)
+     console.log(passwordInput)
+     if(passwordDB==passwordInput){
+         document.updateform.submit()
+     }else{
+         alert("비밀번호가 틀립니다.")
+     }
+    }
+</script>
+</html>
