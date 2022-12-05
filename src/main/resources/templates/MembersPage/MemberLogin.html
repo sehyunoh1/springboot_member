@@ -8,6 +8,7 @@
 <body>
 <div class="container mt-5">
     <form action="/member/login" method="post" name="loginm">
+        <input type="hidden" name="redirectURL"th:value="${redirectURL}">
         <input type="text" name="memberEmail" class="form-control" placeholder="이메일">
         <input type="text" name="memberPassword" class="form-control" placeholder="비밀번호">
         <input type="button" class="btn btn-primary" onclick="login()" value="로그인">

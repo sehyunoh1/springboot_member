@@ -91,7 +91,7 @@ public class MemberTest {
     }
     public MemberDTO newMember(){ // 새로운 member 객체 선언 메서드
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberEmail("1111@aaaa.com");
+        memberDTO.setMemberEmail("1111");
         memberDTO.setMemberPassword("1111");
         memberDTO.setMemberName("이름");
         memberDTO.setMemberAge(22);
@@ -108,5 +108,13 @@ public class MemberTest {
          memberService.delete(saveId);
          // 삭제 후 처리가 되었는지 DB에서 비교
         assertThat(memberService.findById(saveId)).isNull();
+    }
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    public void duplicateTest(){
+        MemberDTO memberDTO = newMember();
+       memberService.save(memberDTO);
+        assertThat( memberService.findByMemberEmail(memberDTO.getMemberEmail())).isNull();
     }
 }
